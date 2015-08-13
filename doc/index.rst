@@ -1,0 +1,5 @@
+=========
+Pynamixel
+=========
+
+.. include:: ../README.rst

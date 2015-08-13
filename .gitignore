@@ -1,0 +1,7 @@
+/.coverage
+/Pynamixel.egg-info/
+/dist/
+*.pyc
+/build/
+/htmlcov/
+/.eggs
