@@ -13,7 +13,7 @@ deploy:
   provider: pypi
   user: jacquev6
   password:
-    secure: @todo
+    secure: TjuhbgiuVrKw/jO/OjP6TtuRiWlbGuOyZnUC7RSUdYNWbDrVJJrVY0t2eam73a8abTH1NQ3xXCcrkO4iPunFyV9Z3x0IrLqrDOevHM6NaCQele27jMck+WI/wlO76TNItaXHhEVtl9v/utCE65dfxLK4pwoX0WCvENcrT4ftYsi6aCYFo2TRY1p51HsURWZyDwCALZrUWERV49tYQsixu4tfgCHwQ8gVrvr225O9UWFfC7rmpZv91La8NKAYLAbhY8gHkOZoRTaf6zEbSOhWSQtactPCzCrrn2l5z1MMbh0meKUdVoJ/nonMqFzhFLMDq+KITaXwGDCwo7epqyyHn8SAQs2ncXbbZmyW/I2PB9rSRr0NYQraGddfk+dUZXU3IEgE+ETNC3OrKk1+HrH1ZSbKo3MCV2Z0jq3RVboEZBxIP/1JpxFDfZuykVa3fXjW9WM1dtXfmEp8koylMa8DpDrbpMcLCiQXD8SUuVU9WwXTtxEDWaagZJl0E8b+EQXb3TLELnvUTs+wzCcVKpr6BA2Rz5Erf16nBlMxWuBJqJ6fyw9GULNlDPmdx3OruVwPU/QCKP0r+yS/gfE0olXvP2q2UBhatOZqvi5pOBcRGF0Qzy3clYnmb5L2/UK2xfvgs2OkRK5GpjOfhzyxzg2UEHrbeUvqq1cVyJFPfd2T0gM=
   on:
     tags: true
     repo: jacquev6/Pynamixel
