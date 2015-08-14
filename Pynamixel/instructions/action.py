@@ -5,7 +5,7 @@
 
 class ActionResponse(object):
     def __init__(self, parameters):
-        pass
+        assert len(parameters) == 0
 
 
 class Action(object):

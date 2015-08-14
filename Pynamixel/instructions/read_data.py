@@ -24,10 +24,6 @@ class ReadData(object):
 
 
 class ReadDataTestCase(unittest.TestCase):
-    def test_code(self):
-        r = ReadData(42)
-        self.assertEqual(r.code, 2)
-
     def test_parameters_without_length(self):
         r = ReadData(42)
         self.assertEqual(r.parameters, [42, 1])
