@@ -5,3 +5,4 @@
 from .bus import ComputeChecksumTestCase, BusTestCase
 from .instructions.tests import *
 from .devices.tests import *
+from .hardwares.tests import *
