@@ -2,4 +2,5 @@
 
 # Copyright 2015 Vincent Jacques <vincent@vincent-jacques.net>
 
-from bus import ComputeChecksumTestCase, BusTestCase
+from .bus import ComputeChecksumTestCase, BusTestCase
+from .instructions.tests import *

@@ -45,7 +45,7 @@ class Bus(object):
         payload = [ident, length, error] + parameters
         if checksum != compute_checksum(payload):
             raise CommunicationError
-        return response_class(ident, error, parameters)
+        return ident, error, response_class(parameters)
 
     def __receive_from_hardware(self, count):
         payload = self.__hardware.receive(count)
@@ -65,7 +65,7 @@ class BusTestCase(unittest.TestCase):
         def __init__(self, code, parameters):
             self.code = code
             self.parameters = parameters
-            self.response_class = lambda a, b, c: (a, b, c)
+            self.response_class = lambda parameters: parameters
 
     def setUp(self):
         super(BusTestCase, self).setUp()
