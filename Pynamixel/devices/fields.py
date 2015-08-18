@@ -14,7 +14,7 @@ class R8(object):
         self.__address = address
 
     def read(self):
-        ident, error, response = self.__bus.send(ident, ReadData(self.__address, 1))
+        ident, error, response = self.__bus.send(self.__ident, ReadData(self.__address, 1))
         return response.data[0]
 
 
@@ -25,11 +25,11 @@ class RW8(object):
         self.__address = address
 
     def read(self):
-        ident, error, response = self.__bus.send(ident, ReadData(self.__address, 1))
+        ident, error, response = self.__bus.send(self.__ident, ReadData(self.__address, 1))
         return response.data[0]
 
     def write(self, value):
-        self.__bus.send(ident, WriteData(self.__address, [value]))
+        self.__bus.send(self.__ident, WriteData(self.__address, [value]))
 
 
 class R16(object):
@@ -39,7 +39,7 @@ class R16(object):
         self.__address = address
 
     def read(self):
-        ident, error, response = self.__bus.send(ident, ReadData(self.__address, 2))
+        ident, error, response = self.__bus.send(self.__ident, ReadData(self.__address, 2))
         return response.data[0] + 0x100 * response.data[1]
 
 
@@ -50,11 +50,11 @@ class RW16(object):
         self.__address = address
 
     def read(self):
-        ident, error, response = self.__bus.send(ident, ReadData(self.__address, 2))
+        ident, error, response = self.__bus.send(self.__ident, ReadData(self.__address, 2))
         return response.data[0] + 0x100 * response.data[1]
 
     def write(self, value):
-        self.__bus.send(ident, WriteData(self.__address, [value % 0x100, value // 0x100]))
+        self.__bus.send(self.__ident, WriteData(self.__address, [value % 0x100, value // 0x100]))
 
 
 class FieldsTestCase(unittest.TestCase):

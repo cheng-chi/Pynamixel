@@ -20,6 +20,7 @@ setuptools.setup(
     license="MIT",
     classifiers=[  # @todo Classifiers
     ],
+    install_requires=["pyserial"],
     tests_require=["MockMockMock<0.6.0"],
     test_suite="Pynamixel.tests",
     use_2to3=True,
