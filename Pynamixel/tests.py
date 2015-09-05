@@ -4,6 +4,5 @@
 
 from .bus import ComputeChecksumTestCase, BusTestCase
 from .concepts.tests import *
-from .devices.tests import *
 from .hardwares.tests import *
 from .instructions.tests import *

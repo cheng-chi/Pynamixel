@@ -58,11 +58,11 @@ class InterpolatorTestCase(unittest.TestCase):
 class Joint(object):
     def __init__(self, actuator, positions):
         """
-        positions: dict from [0, 0x3ff] to your logical angle unit (hint: degrees, radians, [0, 1], etc. But be consistent). Must be monotonous (else, weird weird results).
+        positions: dict from [0, 0x3FF] to your logical angle unit (hint: degrees, radians, [0, 1], etc. But be consistent). Must be monotonous (else, weird weird results).
         Intermediate positions are interpolated linearly. Positions outside are errors in set_position, and extrapolated linearly in get_position.
         """
         self.__actuator = actuator
-        assert all(isinstance(k, int) and 0 <= k <= 0x3ff for k in positions.keys())
+        assert all(isinstance(k, int) and 0 <= k <= 0x3FF for k in positions.keys())
         self.__physical_to_logical = Interpolator({k: float(v) for k, v in positions.items()})
         self.__logical_to_phyical = Interpolator({float(v): k for k, v in positions.items()})
 

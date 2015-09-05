@@ -2,8 +2,6 @@
 
 # Copyright 2015 Vincent Jacques <vincent@vincent-jacques.net>
 
-import unittest
-
 from .fields import RW8, RW16, R8, R16
 
 
@@ -41,7 +39,3 @@ class AXS1(object):
         self.remocon_tx = RW16(bus, ident, 0x32)
         self.ir_obstacle_detect_compare_rd = RW8(bus, ident, 0x34)
         self.light_detect_compare_rd = RW8(bus, ident, 0x35)
-
-
-class AXS1TestCase(unittest.TestCase):
-    pass

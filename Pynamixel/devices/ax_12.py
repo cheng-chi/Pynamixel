@@ -2,8 +2,6 @@
 
 # Copyright 2015 Vincent Jacques <vincent@vincent-jacques.net>
 
-import unittest
-
 from .fields import RW8, RW16, R8, R16
 
 
@@ -46,7 +44,3 @@ class AX12(object):
         self.moving = R8(bus, ident, 0x2E)
         self.lock = RW8(bus, ident, 0x2F)
         self.punch = RW16(bus, ident, 0x30)
-
-
-class AX12TestCase(unittest.TestCase):
-    pass

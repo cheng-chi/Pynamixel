@@ -2,8 +2,6 @@
 
 # Copyright 2015 Vincent Jacques <vincent@vincent-jacques.net>
 
-import unittest
-
 from ..instructions import ReadData, WriteData, RegWrite
 
 
@@ -55,7 +53,3 @@ class RW16(object):
 
     def write(self, value):
         self.__bus.send(self.__ident, WriteData(self.__address, [value % 0x100, value // 0x100]))
-
-
-class FieldsTestCase(unittest.TestCase):
-    pass
