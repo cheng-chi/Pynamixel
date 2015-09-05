@@ -26,6 +26,7 @@ html_theme_options = {
     "github_banner": True,
     "travis_button": True,
 }
+# @todoc logo
 
 
 # http://sphinx-doc.org/ext/autodoc.html
@@ -45,3 +46,21 @@ extensions.append("sphinx.ext.doctest")
 # doctest_global_setup
 # doctest_global_cleanup
 doctest_test_doctest_blocks = True
+
+
+# http://sphinx-doc.org/latest/ext/math.html
+extensions.append("sphinx.ext.mathjax")
+# mathjax_path
+
+# http://matplotlib.org/devel/documenting_mpl.html#module-matplotlib.sphinxext.plot_directive
+extensions.append("matplotlib.sphinxext.plot_directive")
+plot_include_source = True
+plot_html_show_source_link = False
+# plot_pre_code
+# plot_basedir
+plot_formats = [("png", 160)]
+plot_html_show_formats = False
+# plot_rcparams
+# plot_apply_rcparams
+# plot_working_directory
+# plot_template
