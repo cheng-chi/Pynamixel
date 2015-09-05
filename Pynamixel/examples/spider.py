@@ -3,6 +3,7 @@
 # Copyright 2015 Vincent Jacques <vincent@vincent-jacques.net>
 
 r"""
+@todoc This is just a stub.
 @todoc Add links to the building instructions, maybe a picture or video of the robot.
 
 Cinematic model of a leg
@@ -364,6 +365,7 @@ class Spider(object):
                 self.__go(4, -7, amp, self.right_trileg)  # Move right forward
                 self.__go(4, -10, amp, self.right_trileg)  # Lower right
         finally:
+            # @todo A context manager doing just that
             self.system.bus.broadcast(Pynamixel.instructions.WriteData(0x18, 0))  # Turn torque off
 
     def __go(self, r, z, t, legs, wait=True):

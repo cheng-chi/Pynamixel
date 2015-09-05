@@ -4,11 +4,17 @@
 
 
 class PingResponse(object):
+    """
+    @todoc
+    """
     def __init__(self, parameters):
         assert len(parameters) == 0
 
 
 class Ping(object):
+    """
+    @todoc
+    """
     code = 0x01
     parameters = []
     response_class = PingResponse

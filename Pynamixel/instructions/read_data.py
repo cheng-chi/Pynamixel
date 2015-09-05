@@ -6,11 +6,17 @@ import unittest
 
 
 class ReadDataResponse(object):
+    """
+    @todoc
+    """
     def __init__(self, parameters):
         self.data = parameters
 
 
 class ReadData(object):
+    """
+    @todoc
+    """
     code = 0x02
     response_class = ReadDataResponse
 

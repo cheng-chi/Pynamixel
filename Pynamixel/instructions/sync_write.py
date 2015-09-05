@@ -7,6 +7,9 @@ import unittest
 
 
 class SyncWrite(object):
+    """
+    @todoc
+    """
     code = 0x83
     # No response_class because SyncWrite must be broadcasted
 

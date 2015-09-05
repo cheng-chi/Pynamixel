@@ -56,6 +56,9 @@ class InterpolatorTestCase(unittest.TestCase):
 
 
 class Joint(object):
+    """
+    @todoc
+    """
     def __init__(self, actuator, positions):
         """
         positions: dict from [0, 0x3FF] to your logical angle unit (hint: degrees, radians, [0, 1], etc. But be consistent). Must be monotonous (else, weird weird results).
@@ -68,6 +71,9 @@ class Joint(object):
 
     @property
     def goal_position(self):
+        """
+        @todoc
+        """
         return self.__physical_to_logical(self.__actuator.goal_position.read())
 
     @goal_position.setter
@@ -77,6 +83,9 @@ class Joint(object):
         self.__actuator.goal_position.write(int(self.__logical_to_phyical(float(position))))
 
     def relax(self):
+        """
+        @todoc
+        """
         self.__actuator.torque_enable.write(0)
 
 

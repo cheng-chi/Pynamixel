@@ -6,11 +6,17 @@ import unittest
 
 
 class RegWriteResponse(object):
+    """
+    @todoc
+    """
     def __init__(self, parameters):
         assert len(parameters) == 0
 
 
 class RegWrite(object):
+    """
+    @todoc
+    """
     code = 0x04
     response_class = RegWriteResponse
 

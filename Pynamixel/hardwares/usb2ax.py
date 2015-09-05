@@ -11,6 +11,9 @@ import serial  # https://pypi.python.org/pypi/pyserial
 
 
 class USB2AX(object):
+    """
+    @todoc
+    """
     def __init__(self, port, baudrate):
         self.__port = serial.Serial(port=port, baudrate=baudrate, timeout=1, bytesize=serial.EIGHTBITS, parity=serial.PARITY_NONE, stopbits=serial.STOPBITS_ONE)
 

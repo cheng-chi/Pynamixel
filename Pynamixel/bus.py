@@ -11,19 +11,32 @@ def compute_checksum(payload):
     return ~(sum(payload)) & 0xFF
 
 
+# @todo Extract in exceptions.py (Easier to document)
 class CommunicationError(Exception):
+    """
+    @todoc
+    """
     pass
 
 
 class Bus(object):
+    """
+    @todoc
+    """
     def __init__(self, hardware):
         self.__hardware = hardware
 
     def send(self, ident, instruction):
+        """
+        @todoc
+        """
         self.__send(ident, instruction)
         return self.__receive(instruction.response_class)
 
     def broadcast(self, instruction):
+        """
+        @todoc
+        """
         self.__send(0xFE, instruction)
 
     def __send(self, ident, instruction):

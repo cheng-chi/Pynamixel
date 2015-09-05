@@ -33,7 +33,7 @@ html_theme_options = {
 extensions.append("sphinx.ext.autodoc")
 # autoclass_content
 autodoc_member_order = "bysource"
-# autodoc_default_flags
+autodoc_default_flags = ["members"]
 # autodoc_docstring_signature
 # autodoc_mock_imports
 add_module_names = False

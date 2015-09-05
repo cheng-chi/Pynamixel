@@ -1,6 +1,6 @@
 Pynamixel is a Python (2.7+ and 3.4+) library to use Robotis Dynamixel servos.
-It supports several hardwares (USB2Dynamixel, USB2AX, etc. @todo Link to hardware support matrix) and adding a new one is easy.
-@todo Add a note about devices (AX-12, etc.) abstractions and lower-level access to bus.
+It supports several hardwares (see below) and adding a new one is easy.
+It provides different layers allowing very precise control as well as a greater abstraction.
 
 It's licensed under the `MIT license <http://choosealicense.com/licenses/mit/>`__.
 It's available on the `Python package index <http://pypi.python.org/pypi/Pynamixel>`__, its `documentation is hosted by Python <http://pythonhosted.org/Pynamixel>`__ and its source code is on `GitHub <https://github.com/jacquev6/Pynamixel>`__.
@@ -30,10 +30,10 @@ Questions? Remarks? Bugs? Want to contribute? `Open an issue <https://github.com
 .. image:: https://img.shields.io/pypi/v/Pynamixel.svg
     :target: https://pypi.python.org/pypi/Pynamixel
 
-.. image:: https://pypip.in/py_versions/Pynamixel/badge.svg
+.. image:: https://img.shields.io/pypi/pyversions/Pynamixel.svg
     :target: https://pypi.python.org/pypi/Pynamixel
 
-.. image:: https://pypip.in/status/Pynamixel/badge.svg
+.. image:: https://img.shields.io/pypi/status/Pynamixel.svg
     :target: https://pypi.python.org/pypi/Pynamixel
 
 .. image:: https://img.shields.io/github/issues/jacquev6/Pynamixel.svg
@@ -47,6 +47,14 @@ Questions? Remarks? Bugs? Want to contribute? `Open an issue <https://github.com
 
 .. image:: https://img.shields.io/github/stars/jacquev6/Pynamixel.svg
     :target: https://github.com/jacquev6/Pynamixel/stargazers
+
+Supported hardwares
+===================
+
+"Full support" means on Windows, Linux and Mac OS X, with both Python 2.7+ and 3.4+.
+
+- :class:`.USB2AX`: full support
+- USB2Dynamixel: not yet
 
 Quick start
 ===========

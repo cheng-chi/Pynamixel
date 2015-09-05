@@ -6,11 +6,17 @@ import unittest
 
 
 class WriteDataResponse(object):
+    """
+    @todoc
+    """
     def __init__(self, parameters):
         assert len(parameters) == 0
 
 
 class WriteData(object):
+    """
+    @todoc
+    """
     code = 0x03
     response_class = WriteDataResponse
 
