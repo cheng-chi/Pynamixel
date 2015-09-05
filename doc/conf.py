@@ -43,9 +43,24 @@ add_class_names = False
 # http://sphinx-doc.org/ext/doctest.html
 extensions.append("sphinx.ext.doctest")
 # doctest_path
-# doctest_global_setup
+doctest_global_setup = """
+# This setup is for README.rst's doctests.
+# @todo Find a way to put that new actual doctests. See the message of the commit that introduced this line.
+import MockMockMock
+import Pynamixel
+hardware_mock = MockMockMock.Engine().create("hardware")
+hardware = hardware_mock.object
+
+hardware_mock.expect.send([0xFF, 0xFF, 0x01, 0x05, 0x03, 0x1E, 0x00, 0x02, 0xD6])
+hardware_mock.expect.receive(4).andReturn([0xFF, 0xFF, 0x01, 0x02])
+hardware_mock.expect.receive(2).andReturn([0x00, 0xFC])
+
+hardware_mock.expect.send([0xFF, 0xFF, 0x01, 0x04, 0x02, 0x2E, 0x01, 0xC9]).andReturn(None)
+hardware_mock.expect.receive(4).andReturn([0xFF, 0xFF, 0x01, 0x03])
+hardware_mock.expect.receive(3).andReturn([0x00, 0x01, 0xFA])
+"""
 # doctest_global_cleanup
-doctest_test_doctest_blocks = False
+doctest_test_doctest_blocks = True
 
 
 # http://sphinx-doc.org/latest/ext/math.html
