@@ -1,4 +1,4 @@
-Pynamixel is a Python (@todo: versions) library to use Robotis Dynamixel servos.
+Pynamixel is a Python (2.7+ and 3.4+) library to use Robotis Dynamixel servos.
 It supports several hardwares (USB2Dynamixel, USB2AX, etc. @todo Link to hardware support matrix) and adding a new one is easy.
 @todo Add a note about devices (AX-12, etc.) abstractions and lower-level access to bus.
 
