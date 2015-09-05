@@ -24,4 +24,4 @@ Contents
 
     user_guide
     reference
-    examples/spider
+    examples

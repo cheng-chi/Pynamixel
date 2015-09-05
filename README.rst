@@ -47,3 +47,57 @@ Questions? Remarks? Bugs? Want to contribute? `Open an issue <https://github.com
 
 .. image:: https://img.shields.io/github/stars/jacquev6/Pynamixel.svg
     :target: https://github.com/jacquev6/Pynamixel/stargazers
+
+Quick start
+===========
+
+Install from PyPI::
+
+    $ pip install Pynamixel
+
+Import:
+
+>>> import Pynamixel
+
+.. testsetup::
+
+    import MockMockMock
+    import Pynamixel
+    hardware_mock = MockMockMock.Engine().create("hardware")
+    hardware = hardware_mock.object
+
+Create a hardware:
+
+>>> hardware = Pynamixel.hardwares.USB2AX("/dev/ttyACM0", 1000000)
+
+Create a system and a device:
+
+.. doctest::
+
+    >>> system = Pynamixel.System(Pynamixel.Bus(hardware))
+    >>> servo = system.add_device(Pynamixel.devices.AX12, 1)
+
+Set the servo's goal position:
+
+.. testsetup::
+
+    hardware_mock.expect.send([0xFF, 0xFF, 0x01, 0x05, 0x03, 0x1E, 0x00, 0x02, 0xD6])
+    hardware_mock.expect.receive(4).andReturn([0xFF, 0xFF, 0x01, 0x02])
+    hardware_mock.expect.receive(2).andReturn([0x00, 0xFC])
+
+.. doctest::
+
+    >>> servo.goal_position.write(0x200)
+
+And see that it's moving:
+
+.. testsetup::
+
+    hardware_mock.expect.send([0xFF, 0xFF, 0x01, 0x04, 0x02, 0x2E, 0x01, 0xC9])
+    hardware_mock.expect.receive(4).andReturn([0xFF, 0xFF, 0x01, 0x03])
+    hardware_mock.expect.receive(3).andReturn([0x00, 0x01, 0xFA])
+
+.. doctest::
+
+    >>> servo.moving.read()
+    1

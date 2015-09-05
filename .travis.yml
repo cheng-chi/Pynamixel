@@ -4,6 +4,7 @@ python:
 - 3.4
 install:
 - pip install sphinx coveralls
+- pip install matplotlib
 script:
 - coverage run "--include=Pynamixel/*" setup.py test
 - if [ "v$TRAVIS_PYTHON_VERSION" == "v2.7" ]; then python setup.py build_sphinx --builder=doctest; fi

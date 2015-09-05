@@ -18,7 +18,7 @@ nitpicky = True
 extensions.append("alabaster")
 html_theme = "alabaster"
 html_sidebars = {
-    "**": ["about.html", "searchbox.html"],
+    "**": ["about.html", "navigation.html", "searchbox.html"],
 }
 html_theme_options = {
     "github_user": "jacquev6",
@@ -45,7 +45,7 @@ extensions.append("sphinx.ext.doctest")
 # doctest_path
 # doctest_global_setup
 # doctest_global_cleanup
-doctest_test_doctest_blocks = True
+doctest_test_doctest_blocks = False
 
 
 # http://sphinx-doc.org/latest/ext/math.html
