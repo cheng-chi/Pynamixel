@@ -3,9 +3,9 @@ It supports several hardwares (see below) and adding a new one is easy.
 It provides different layers allowing very precise control as well as a greater abstraction.
 
 It's licensed under the `MIT license <http://choosealicense.com/licenses/mit/>`__.
-It's available on the `Python package index <http://pypi.python.org/pypi/Pynamixel>`__, its `documentation is hosted by Python <http://pythonhosted.org/Pynamixel>`__ and its source code is on `GitHub <https://github.com/jacquev6/Pynamixel>`__.
-
-It's currently in a very early stage, and you should use it only if you've read the code and are satisfied with what it does.
+It's available on the `Python package index <http://pypi.python.org/pypi/Pynamixel>`__,
+its `documentation is hosted by Python <http://pythonhosted.org/Pynamixel>`__
+and its source code is on `GitHub <https://github.com/jacquev6/Pynamixel>`__.
 
 Questions? Remarks? Bugs? Want to contribute? `Open an issue <https://github.com/jacquev6/Pynamixel/issues>`__!
 
