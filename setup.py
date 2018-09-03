@@ -15,7 +15,7 @@ setuptools.setup(
     description="Library to use Dynamixel servos supporting several hardwares",
     author="Vincent Jacques",
     author_email="vincent@vincent-jacques.net",
-    url="http://pythonhosted.org/Pynamixel",
+    url="https://jacquev6.github.io/Pynamixel/",
     packages=setuptools.find_packages(),
     license="MIT",
     classifiers=[
