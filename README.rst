@@ -55,6 +55,7 @@ Supported hardwares
 
 - USB2AX: full support
 - USB2Dynamixel: not yet
+- U2D2: not yet
 
 Quick start
 ===========
