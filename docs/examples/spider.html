@@ -1,0 +1,297 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Spider &#8212; Pynamixel 0.1.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Examples" href="../examples.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="module-Pynamixel.examples.spider">
+<span id="spider"></span><h1>Spider<a class="headerlink" href="#module-Pynamixel.examples.spider" title="Permalink to this headline">¶</a></h1>
+<p>&#64;todoc This is just a stub.
+&#64;todoc Add links to the building instructions, maybe a picture or video of the robot.</p>
+<div class="section" id="cinematic-model-of-a-leg">
+<h2>Cinematic model of a leg<a class="headerlink" href="#cinematic-model-of-a-leg" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="direct-model">
+<h3>Direct model<a class="headerlink" href="#direct-model" title="Permalink to this headline">¶</a></h3>
+<p>&#64;todoc Add a schematic of the leg to explain the direct model.</p>
+<p>With <span class="math notranslate nohighlight">\(a' = k - a\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{ \begin{array}{l}
+    r = l_1 \cdot \cos(k) + l_2 \cdot \sin(k) + l_3 \cdot \sin(a') + l_4 \cdot \cos(a')
+\\
+    z = l_1 \cdot \sin(k) - l_2 \cdot \cos(k) - l_3 \cdot \cos(a') + l_4 \cdot \sin(a')
+\end{array} \right.\end{split}\]</div>
+<p>Let:</p>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}l_{12} = \sqrt{l_1^2 + l_2^2}\\l_{34} = \sqrt{l_3^2 + l_4^2}\\\alpha_{21} = \arctan(l_2 / l_1)\\\alpha_{43} = \arctan(l_4 / l_3)\end{aligned}\end{align} \]</div>
+<p>We obtain:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{ \begin{array}{l}
+    r = l_{12} \cdot \cos(k - \alpha_{21}) + l_{34} \cdot \sin(a' + \alpha_{43})
+\\
+    z = l_{12} \cdot \sin(k - \alpha_{21}) - l_{34} \cdot \cos(a' + \alpha_{43})
+\end{array} \right.\end{split}\]</div>
+<p>Let <span class="math notranslate nohighlight">\(k' = k - \alpha_{21}\)</span> and <span class="math notranslate nohighlight">\(a'' = a' + \alpha_{43}\)</span>:</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\left\{ \begin{array}{l}
+    r = l_{12} \cdot \cos(k') + l_{34} \cdot \sin(a'')
+\\
+    z = l_{12} \cdot \sin(k') - l_{34} \cdot \cos(a'')
+\end{array} \right.\end{split}\]</div>
+<p>&#64;todoc Improve readability.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="n">l_1</span> <span class="o">=</span> <span class="mf">5.9</span>
+<span class="n">l_2</span> <span class="o">=</span> <span class="mf">2.2</span>
+<span class="n">l_3</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">l_4</span> <span class="o">=</span> <span class="mf">1.4</span>
+
+<span class="n">l_12</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span> <span class="n">l_2</span><span class="p">)</span>
+<span class="n">l_34</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">l_3</span><span class="p">,</span> <span class="n">l_4</span><span class="p">)</span>
+<span class="n">alpha_21</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">l_2</span><span class="p">,</span> <span class="n">l_1</span><span class="p">)</span>
+<span class="n">alpha_43</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">l_4</span><span class="p">,</span> <span class="n">l_3</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">20</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">10</span><span class="p">]:</span>
+  <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">60</span><span class="p">,</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">30</span><span class="p">]:</span>
+    <span class="n">ap</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">a</span>
+    <span class="n">r_1</span> <span class="o">=</span> <span class="n">l_1</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">z_1</span> <span class="o">=</span> <span class="n">l_1</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">r_2</span> <span class="o">=</span> <span class="n">r_1</span> <span class="o">+</span> <span class="n">l_2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">z_2</span> <span class="o">=</span> <span class="n">z_1</span> <span class="o">-</span> <span class="n">l_2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">r_3</span> <span class="o">=</span> <span class="n">r_2</span> <span class="o">+</span> <span class="n">l_3</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span>
+    <span class="n">z_3</span> <span class="o">=</span> <span class="n">z_2</span> <span class="o">-</span> <span class="n">l_3</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span>
+    <span class="n">r_4</span> <span class="o">=</span> <span class="n">r_3</span> <span class="o">+</span> <span class="n">l_4</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span>
+    <span class="n">z_4</span> <span class="o">=</span> <span class="n">z_3</span> <span class="o">+</span> <span class="n">l_4</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">r_1</span><span class="p">,</span> <span class="n">r_2</span><span class="p">,</span> <span class="n">r_3</span><span class="p">,</span> <span class="n">r_4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">z_1</span><span class="p">,</span> <span class="n">z_2</span><span class="p">,</span> <span class="n">z_3</span><span class="p">,</span> <span class="n">z_4</span><span class="p">])</span>
+
+    <span class="n">kp</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">alpha_21</span>
+    <span class="n">app</span> <span class="o">=</span> <span class="n">ap</span> <span class="o">+</span> <span class="n">alpha_43</span>
+    <span class="n">r_2</span> <span class="o">=</span> <span class="n">l_12</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">kp</span><span class="p">)</span>
+    <span class="n">z_2</span> <span class="o">=</span> <span class="n">l_12</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">kp</span><span class="p">)</span>
+    <span class="n">r_4</span> <span class="o">=</span> <span class="n">r_2</span> <span class="o">+</span> <span class="n">l_34</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="n">z_4</span> <span class="o">=</span> <span class="n">z_2</span> <span class="o">-</span> <span class="n">l_34</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">app</span><span class="p">)</span>
+    <span class="n">r</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">r_2</span><span class="p">,</span> <span class="n">r_4</span><span class="p">]</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">r_2</span><span class="p">,</span> <span class="n">r_4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">z_2</span><span class="p">,</span> <span class="n">z_4</span><span class="p">])</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/spider-1.png" src="../_images/spider-1.png" />
+</div>
+</div>
+<div class="section" id="inverse-model">
+<h3>Inverse model<a class="headerlink" href="#inverse-model" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="finding-and">
+<h4>Finding <span class="math notranslate nohighlight">\(k'\)</span> and <span class="math notranslate nohighlight">\(k\)</span><a class="headerlink" href="#finding-and" title="Permalink to this headline">¶</a></h4>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}\left\{ \begin{array}{l}
+    r = l_{12} \cdot \cos(k') + l_{34} \cdot \sin(a'')
+\\
+    z = l_{12} \cdot \sin(k') - l_{34} \cdot \cos(a'')
+\end{array} \right.\end{split}\\\begin{split}\left\{ \begin{array}{l}
+    l_{34} \cdot \sin(a'') = r - l_{12} \cdot \cos(k')
+\\
+    l_{34} \cdot \cos(a'') = l_{12} \cdot \sin(k') - z
+\end{array} \right.\end{split}\\\begin{split}\left\{ \begin{array}{l}
+    (l_{34} \cdot \sin(a''))^2 = (r - l_{12} \cdot \cos(k'))^2
+\\
+    (l_{34} \cdot \cos(a''))^2 = (l_{12} \cdot \sin(k') - z)^2
+\end{array} \right.\end{split}\\\begin{split}\left\{ \begin{array}{l}
+    l_{34}^2 \cdot \sin(a'')^2 = r^2 - 2 \cdot r \cdot l_{12} \cdot \cos(k') + l_{12}^2 \cdot \cos(k')^2
+\\
+    l_{34}^2 \cdot \cos(a'')^2 = l_{12}^2 \cdot \sin(k')^2 - 2 \cdot l_{12} \cdot \sin(k') \cdot z + z^2
+\end{array} \right.\end{split}\\l_{34}^2 \cdot \sin(a'')^2 + l_{34}^2 \cdot \cos(a'')^2 = r^2 - 2 \cdot r \cdot l_{12} \cdot \cos(k') + l_{12}^2 \cdot \cos(k')^2 + l_{12}^2 \cdot \sin(k')^2 - 2 \cdot l_{12} \cdot \sin(k') \cdot z + z^2\\l_{34}^2 \cdot (\sin(a'')^2 + \cos(a'')^2) = r^2 - 2 \cdot r \cdot l_{12} \cdot \cos(k') + l_{12}^2 \cdot (\sin(k')^2 + \cos(k')^2) - 2 \cdot l_{12} \cdot \sin(k') \cdot z + z^2\\l_{34}^2 = r^2 - 2 \cdot r \cdot l_{12} \cdot \cos(k') + l_{12}^2 - 2 \cdot l_{12} \cdot \sin(k') \cdot z + z^2\\r^2 + z^2 + l_{12}^2 - l_{34}^2 = 2 \cdot r \cdot l_{12} \cdot \cos(k') + 2 \cdot l_{12} \cdot \sin(k') \cdot z\\\frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12}} = r \cdot \cos(k') + z \cdot \sin(k')\\\frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12} \cdot \sqrt{r^2 + z^2}} = \sin(k' + \arctan(r/z))\\\arcsin\left(\frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12} \cdot \sqrt{r^2 + z^2}}\right) = k' + \arctan(r/z)\\k' = \arcsin\left(\frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12} \cdot \sqrt{r^2 + z^2}}\right) - \arctan(r/z)\\k = \arcsin\left(\frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12} \cdot \sqrt{r^2 + z^2}}\right) - \arctan(r/z) + \alpha_{21}\end{aligned}\end{align} \]</div>
+</div>
+<div class="section" id="finding">
+<h4>Finding <span class="math notranslate nohighlight">\(a''\)</span><a class="headerlink" href="#finding" title="Permalink to this headline">¶</a></h4>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}\left\{ \begin{array}{l}
+    r = l_{12} \cdot \cos(k') + l_{34} \cdot \sin(a'')
+\\
+    z = l_{12} \cdot \sin(k') - l_{34} \cdot \cos(a'')
+\end{array} \right.\end{split}\\\begin{split}\left\{ \begin{array}{l}
+    l_{12} \cdot \cos(k') = r - l_{34} \cdot \sin(a'')
+\\
+    l_{12} \cdot \sin(k') = z + l_{34} \cdot \cos(a'')
+\end{array} \right.\end{split}\\\begin{split}\left\{ \begin{array}{l}
+    (l_{12} \cdot \cos(k'))^2 = (r - l_{34} \cdot \sin(a''))^2
+\\
+    (l_{12} \cdot \sin(k'))^2 = (z + l_{34} \cdot \cos(a''))^2
+\end{array} \right.\end{split}\\\begin{split}\left\{ \begin{array}{l}
+    l_{12}^2 \cdot \cos(k')^2 = r^2 - 2 \cdot r \cdot l_{34} \cdot \sin(a'') + l_{34}^2 \cdot \sin(a'')^2
+\\
+    l_{12}^2 \cdot \sin(k')^2 = z^2 + 2 \cdot z \cdot l_{34} \cdot \cos(a'') + l_{34}^2 \cdot \cos(a'')^2
+\end{array} \right.\end{split}\\l_{12}^2 \cdot \cos(k')^2 + l_{12}^2 \cdot \sin(k')^2 = r^2 - 2 \cdot r \cdot l_{34} \cdot \sin(a'') + l_{34}^2 \cdot \sin(a'')^2 + z^2 + 2 \cdot z \cdot l_{34} \cdot \cos(a'') + l_{34}^2 \cdot \cos(a'')^2\\l_{12}^2 \cdot (\cos(k')^2 + \sin(k')^2) = r^2 - 2 \cdot r \cdot l_{34} \cdot \sin(a'') + z^2 + 2 \cdot z \cdot l_{34} \cdot \cos(a'') + l_{34}^2 \cdot (\sin(a'')^2 + \cos(a'')^2)\\l_{12}^2 = r^2 - 2 \cdot r \cdot l_{34} \cdot \sin(a'') + z^2 + 2 \cdot z \cdot l_{34} \cdot \cos(a'') + l_{34}^2\\l_{12}^2 - r^2 - z^2 - l_{34}^2 = 2 \cdot z \cdot l_{34} \cdot \cos(a'') - 2 \cdot r \cdot l_{34} \cdot \sin(a'')\\\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34}} = z \cdot \cos(a'') - r \cdot \sin(a'')\\\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34}} = \sqrt{r^2 + z^2} \cdot \sin(a'' - \arctan(z/r))\\\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}} = \sin(a'' - \arctan(z/r))\\\arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) = a'' - \arctan(z/r)\\a'' = \arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) + \arctan(z/r)\\a' = \arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) + \arctan(z/r) - \alpha_{43}\\a = k - \arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) - \arctan(z/r) + \alpha_{43}\end{aligned}\end{align} \]</div>
+</div>
+<div class="section" id="let-s-try-it">
+<h4>Let’s try it<a class="headerlink" href="#let-s-try-it" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="kn">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+
+<span class="n">l_1</span> <span class="o">=</span> <span class="mf">5.9</span>
+<span class="n">l_2</span> <span class="o">=</span> <span class="mf">2.2</span>
+<span class="n">l_3</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">l_4</span> <span class="o">=</span> <span class="mf">1.4</span>
+
+<span class="n">l_12</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">l_1</span><span class="p">,</span> <span class="n">l_2</span><span class="p">)</span>
+<span class="n">l_34</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">hypot</span><span class="p">(</span><span class="n">l_3</span><span class="p">,</span> <span class="n">l_4</span><span class="p">)</span>
+<span class="n">alpha_21</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">l_2</span><span class="p">,</span> <span class="n">l_1</span><span class="p">)</span>
+<span class="n">alpha_43</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">atan2</span><span class="p">(</span><span class="n">l_4</span><span class="p">,</span> <span class="n">l_3</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="p">[</span><span class="mf">6.</span><span class="p">,</span> <span class="mf">8.</span><span class="p">,</span> <span class="mf">10.</span><span class="p">]:</span>
+  <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="p">[</span><span class="o">-</span><span class="mf">4.</span><span class="p">,</span> <span class="o">-</span><span class="mf">6.</span><span class="p">,</span> <span class="o">-</span><span class="mf">8.</span><span class="p">]:</span>
+    <span class="c1"># @todoc Review previous resolution to explain why it&#39;s -arcsin instead of just arcsin</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">((</span><span class="n">r</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">z</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">l_12</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">l_34</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l_12</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">z</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))))</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">r</span><span class="o">/</span><span class="n">z</span><span class="p">)</span> <span class="o">+</span> <span class="n">alpha_21</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="p">(</span><span class="o">-</span><span class="n">math</span><span class="o">.</span><span class="n">asin</span><span class="p">((</span><span class="n">l_12</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">r</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">z</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">l_34</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">l_34</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">r</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">z</span> <span class="o">**</span> <span class="mi">2</span><span class="p">))))</span> <span class="o">-</span> <span class="n">math</span><span class="o">.</span><span class="n">atan</span><span class="p">(</span><span class="n">z</span><span class="o">/</span><span class="n">r</span><span class="p">)</span> <span class="o">+</span> <span class="n">alpha_43</span>
+
+    <span class="n">ap</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">a</span>
+    <span class="n">r_1</span> <span class="o">=</span> <span class="n">l_1</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">z_1</span> <span class="o">=</span> <span class="n">l_1</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">r_2</span> <span class="o">=</span> <span class="n">r_1</span> <span class="o">+</span> <span class="n">l_2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">z_2</span> <span class="o">=</span> <span class="n">z_1</span> <span class="o">-</span> <span class="n">l_2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+    <span class="n">r_3</span> <span class="o">=</span> <span class="n">r_2</span> <span class="o">+</span> <span class="n">l_3</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span>
+    <span class="n">z_3</span> <span class="o">=</span> <span class="n">z_2</span> <span class="o">-</span> <span class="n">l_3</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span>
+    <span class="n">r_4</span> <span class="o">=</span> <span class="n">r_3</span> <span class="o">+</span> <span class="n">l_4</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span>
+    <span class="n">z_4</span> <span class="o">=</span> <span class="n">z_3</span> <span class="o">+</span> <span class="n">l_4</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">ap</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="n">r_1</span><span class="p">,</span> <span class="n">r_2</span><span class="p">,</span> <span class="n">r_3</span><span class="p">,</span> <span class="n">r_4</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">z_1</span><span class="p">,</span> <span class="n">z_2</span><span class="p">,</span> <span class="n">z_3</span><span class="p">,</span> <span class="n">z_4</span><span class="p">])</span>
+
+    <span class="c1"># kp = k - alpha_21</span>
+    <span class="c1"># app = ap + alpha_43</span>
+    <span class="c1"># r_2 = l_12 * math.cos(kp)</span>
+    <span class="c1"># z_2 = l_12 * math.sin(kp)</span>
+    <span class="c1"># r_4 = r_2 + l_34 * math.sin(app)</span>
+    <span class="c1"># z_4 = z_2 - l_34 * math.cos(app)</span>
+    <span class="c1"># plt.plot([0, r_2, r_4], [0, z_2, z_4])</span>
+</pre></div>
+</div>
+<div class="figure">
+<img alt="../_images/spider-2.png" src="../_images/spider-2.png" />
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Pynamixel</a></h1>
+
+
+
+
+
+
+<p>
+<iframe src="https://ghbtns.com/github-btn.html?user=jacquev6&repo=Pynamixel&type=watch&count=true&size=large&v=2"
+  allowtransparency="true" frameborder="0" scrolling="0" width="200px" height="35px"></iframe>
+</p>
+
+
+
+
+
+    
+
+<p>
+<a href="https://travis-ci.org/jacquev6/Pynamixel">
+    <img
+        alt="https://secure.travis-ci.org/jacquev6/Pynamixel.svg?branch=master"
+        src="https://secure.travis-ci.org/jacquev6/Pynamixel.svg?branch=master"
+    />
+</a>
+</p>
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../user_guide.html">User guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../reference.html">Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../examples.html">Examples</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Spider</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cinematic-model-of-a-leg">Cinematic model of a leg</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#direct-model">Direct model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#inverse-model">Inverse model</a><ul>
+<li class="toctree-l5"><a class="reference internal" href="#finding-and">Finding <span class="math notranslate nohighlight">\(k'\)</span> and <span class="math notranslate nohighlight">\(k\)</span></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#finding">Finding <span class="math notranslate nohighlight">\(a''\)</span></a></li>
+<li class="toctree-l5"><a class="reference internal" href="#let-s-try-it">Let’s try it</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2015-2018 <a href="http://vincent-jacques.net/contact">Vincent Jacques</a> <script>var jacquev6_ribbon_github="Pynamixel"</script><script src="https://jacquev6.github.io/ribbon.js"></script>.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.7.8</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.11</a>
+      
+      |
+      <a href="../_sources/examples/spider.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

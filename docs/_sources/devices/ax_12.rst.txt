@@ -1,0 +1,4 @@
+AX12
+====
+
+.. automodule:: Pynamixel.devices.ax_12

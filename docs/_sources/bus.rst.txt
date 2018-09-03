@@ -1,0 +1,5 @@
+===
+Bus
+===
+
+.. automodule:: Pynamixel.bus
