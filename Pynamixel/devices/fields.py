@@ -52,4 +52,7 @@ class RW16(object):
         return response.data[0] + 0x100 * response.data[1]
 
     def write(self, value):
-        self.__system.bus.send(self.__ident, self.__system.instruction_for_writes(self.__address, [value % 0x100, value // 0x100]))
+        self.__system.bus.send(
+            self.__ident,
+            self.__system.instruction_for_writes(self.__address, [value % 0x100, value // 0x100])
+        )

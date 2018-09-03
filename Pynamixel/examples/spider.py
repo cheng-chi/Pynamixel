@@ -130,9 +130,11 @@ Finding :math:`k'` and :math:`k`
         l_{34}^2 \cdot \cos(a'')^2 = l_{12}^2 \cdot \sin(k')^2 - 2 \cdot l_{12} \cdot \sin(k') \cdot z + z^2
     \end{array} \right.
 
-    l_{34}^2 \cdot \sin(a'')^2 + l_{34}^2 \cdot \cos(a'')^2 = r^2 - 2 \cdot r \cdot l_{12} \cdot \cos(k') + l_{12}^2 \cdot \cos(k')^2 + l_{12}^2 \cdot \sin(k')^2 - 2 \cdot l_{12} \cdot \sin(k') \cdot z + z^2
+    l_{34}^2 \cdot \sin(a'')^2 + l_{34}^2 \cdot \cos(a'')^2 = r^2 - 2 \cdot r \cdot l_{12} \cdot \cos(k') +
+    l_{12}^2 \cdot \cos(k')^2 + l_{12}^2 \cdot \sin(k')^2 - 2 \cdot l_{12} \cdot \sin(k') \cdot z + z^2
 
-    l_{34}^2 \cdot (\sin(a'')^2 + \cos(a'')^2) = r^2 - 2 \cdot r \cdot l_{12} \cdot \cos(k') + l_{12}^2 \cdot (\sin(k')^2 + \cos(k')^2) - 2 \cdot l_{12} \cdot \sin(k') \cdot z + z^2
+    l_{34}^2 \cdot (\sin(a'')^2 + \cos(a'')^2) = r^2 - 2 \cdot r \cdot l_{12} \cdot \cos(k') +
+    l_{12}^2 \cdot (\sin(k')^2 + \cos(k')^2) - 2 \cdot l_{12} \cdot \sin(k') \cdot z + z^2
 
     l_{34}^2 = r^2 - 2 \cdot r \cdot l_{12} \cdot \cos(k') + l_{12}^2 - 2 \cdot l_{12} \cdot \sin(k') \cdot z + z^2
 
@@ -142,11 +144,14 @@ Finding :math:`k'` and :math:`k`
 
     \frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12} \cdot \sqrt{r^2 + z^2}} = \sin(k' + \arctan(r/z))
 
-    \arcsin\left(\frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12} \cdot \sqrt{r^2 + z^2}}\right) = k' + \arctan(r/z)
+    \arcsin\left(\frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12} \cdot \sqrt{r^2 + z^2}}\right) = k' +
+    \arctan(r/z)
 
-    k' = \arcsin\left(\frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12} \cdot \sqrt{r^2 + z^2}}\right) - \arctan(r/z)
+    k' = \arcsin\left(\frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12} \cdot \sqrt{r^2 + z^2}}\right) -
+    \arctan(r/z)
 
-    k = \arcsin\left(\frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12} \cdot \sqrt{r^2 + z^2}}\right) - \arctan(r/z) + \alpha_{21}
+    k = \arcsin\left(\frac{r^2 + z^2 + l_{12}^2 - l_{34}^2}{2 \cdot l_{12} \cdot \sqrt{r^2 + z^2}}\right) -
+    \arctan(r/z) + \alpha_{21}
 
 Finding :math:`a''`
 ~~~~~~~~~~~~~~~~~~~
@@ -177,9 +182,11 @@ Finding :math:`a''`
         l_{12}^2 \cdot \sin(k')^2 = z^2 + 2 \cdot z \cdot l_{34} \cdot \cos(a'') + l_{34}^2 \cdot \cos(a'')^2
     \end{array} \right.
 
-    l_{12}^2 \cdot \cos(k')^2 + l_{12}^2 \cdot \sin(k')^2 = r^2 - 2 \cdot r \cdot l_{34} \cdot \sin(a'') + l_{34}^2 \cdot \sin(a'')^2 + z^2 + 2 \cdot z \cdot l_{34} \cdot \cos(a'') + l_{34}^2 \cdot \cos(a'')^2
+    l_{12}^2 \cdot \cos(k')^2 + l_{12}^2 \cdot \sin(k')^2 = r^2 - 2 \cdot r \cdot l_{34} \cdot \sin(a'') +
+    l_{34}^2 \cdot \sin(a'')^2 + z^2 + 2 \cdot z \cdot l_{34} \cdot \cos(a'') + l_{34}^2 \cdot \cos(a'')^2
 
-    l_{12}^2 \cdot (\cos(k')^2 + \sin(k')^2) = r^2 - 2 \cdot r \cdot l_{34} \cdot \sin(a'') + z^2 + 2 \cdot z \cdot l_{34} \cdot \cos(a'') + l_{34}^2 \cdot (\sin(a'')^2 + \cos(a'')^2)
+    l_{12}^2 \cdot (\cos(k')^2 + \sin(k')^2) = r^2 - 2 \cdot r \cdot l_{34} \cdot \sin(a'') + z^2 +
+    2 \cdot z \cdot l_{34} \cdot \cos(a'') + l_{34}^2 \cdot (\sin(a'')^2 + \cos(a'')^2)
 
     l_{12}^2 = r^2 - 2 \cdot r \cdot l_{34} \cdot \sin(a'') + z^2 + 2 \cdot z \cdot l_{34} \cdot \cos(a'') + l_{34}^2
 
@@ -191,13 +198,17 @@ Finding :math:`a''`
 
     \frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}} = \sin(a'' - \arctan(z/r))
 
-    \arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) = a'' - \arctan(z/r)
+    \arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) = a'' -
+    \arctan(z/r)
 
-    a'' = \arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) + \arctan(z/r)
+    a'' = \arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) +
+    \arctan(z/r)
 
-    a' = \arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) + \arctan(z/r) - \alpha_{43}
+    a' = \arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) +
+    \arctan(z/r) - \alpha_{43}
 
-    a = k - \arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) - \arctan(z/r) + \alpha_{43}
+    a = k - \arcsin\left(\frac{l_{12}^2 - r^2 - z^2 - l_{34}^2}{2 \cdot l_{34} \cdot \sqrt{r^2 + z^2}}\right) -
+    \arctan(z/r) + \alpha_{43}
 
 Let's try it
 ~~~~~~~~~~~~
@@ -222,8 +233,17 @@ Let's try it
     for r in [6., 8., 10.]:
       for z in [-4., -6., -8.]:
         # @todoc Review previous resolution to explain why it's -arcsin instead of just arcsin
-        k = (-math.asin((r ** 2 + z ** 2 + l_12 ** 2 - l_34 ** 2) / (2 * l_12 * math.sqrt(r ** 2 + z ** 2)))) - math.atan(r/z) + alpha_21
-        a = k - (-math.asin((l_12 ** 2 - r ** 2 - z ** 2 - l_34 ** 2) / (2 * l_34 * math.sqrt(r ** 2 + z ** 2)))) - math.atan(z/r) + alpha_43
+        k = (
+            (-math.asin((r ** 2 + z ** 2 + l_12 ** 2 - l_34 ** 2) / (2 * l_12 * math.sqrt(r ** 2 + z ** 2)))) -
+            math.atan(r/z) +
+            alpha_21
+        )
+        a = (
+            k -
+            (-math.asin((l_12 ** 2 - r ** 2 - z ** 2 - l_34 ** 2) / (2 * l_34 * math.sqrt(r ** 2 + z ** 2)))) -
+            math.atan(z/r) +
+            alpha_43
+        )
 
         ap = k - a
         r_1 = l_1 * math.cos(k)
@@ -273,12 +293,20 @@ class Leg(object):
         self.ankle.goal_position = a
 
     def __compute_ka(self, r, z):
-        k = math.pi - math.asin((r ** 2 + z ** 2 + self.l_12 ** 2 - self.l_34 ** 2) / (2 * self.l_12 * math.sqrt(r ** 2 + z ** 2))) - math.atan2(r, z) + self.alpha_21
-        a = k + math.asin((self.l_12 ** 2 - r ** 2 - z ** 2 - self.l_34 ** 2) / (2 * self.l_34 * math.sqrt(r ** 2 + z ** 2))) - math.atan2(z, r) + self.alpha_43
-        while k > math.pi: k -= 2 * math.pi
-        while k < -math.pi: k += 2 * math.pi
-        while a > math.pi: a -= 2 * math.pi
-        while a < -math.pi: a += 2 * math.pi
+        k = math.pi - math.asin(
+            (r ** 2 + z ** 2 + self.l_12 ** 2 - self.l_34 ** 2) / (2 * self.l_12 * math.sqrt(r ** 2 + z ** 2))
+        ) - math.atan2(r, z) + self.alpha_21
+        a = k + math.asin(
+            (self.l_12 ** 2 - r ** 2 - z ** 2 - self.l_34 ** 2) / (2 * self.l_34 * math.sqrt(r ** 2 + z ** 2))
+        ) - math.atan2(z, r) + self.alpha_43
+        while k > math.pi:
+            k -= 2 * math.pi
+        while k < -math.pi:
+            k += 2 * math.pi
+        while a > math.pi:
+            a -= 2 * math.pi
+        while a < -math.pi:
+            a += 2 * math.pi
         return k, a
 
     def get_rz(self):
@@ -313,38 +341,74 @@ class Spider(object):
 
         self.right_front_leg = Leg(
             Pynamixel.concepts.Joint(self.system.get_device(1), {POSITION_M90_DEGREES: -1, POSITION_M45_DEGREES: 1}),
-            Pynamixel.concepts.Joint(self.system.get_device(3), {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}),
-            Pynamixel.concepts.Joint(self.system.get_device(5), {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(3),
+                {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}
+            ),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(5),
+                {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}
+            ),
         )
 
         self.right_middle_leg = Leg(
             Pynamixel.concepts.Joint(self.system.get_device(7), {POSITION_M22_DEGREES: -1, POSITION_22_DEGREES: 1}),
-            Pynamixel.concepts.Joint(self.system.get_device(9), {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}),
-            Pynamixel.concepts.Joint(self.system.get_device(11), {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(9),
+                {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}
+            ),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(11),
+                {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}
+            ),
         )
 
         self.right_rear_leg = Leg(
             Pynamixel.concepts.Joint(self.system.get_device(13), {POSITION_45_DEGREES: -1, POSITION_90_DEGREES: 1}),
-            Pynamixel.concepts.Joint(self.system.get_device(15), {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}),
-            Pynamixel.concepts.Joint(self.system.get_device(17), {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(15),
+                {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}
+            ),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(17),
+                {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}
+            ),
         )
 
         self.left_front_leg = Leg(
             Pynamixel.concepts.Joint(self.system.get_device(2), {POSITION_90_DEGREES: -1, POSITION_45_DEGREES: 1}),
-            Pynamixel.concepts.Joint(self.system.get_device(4), {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}),
-            Pynamixel.concepts.Joint(self.system.get_device(6), {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(4),
+                {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}
+            ),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(6),
+                {POSITION_M90_DEGREES: RADIANS_M90_DEGREES, POSITION_70_DEGREES: RADIANS_70_DEGREES}
+            ),
         )
 
         self.left_middle_leg = Leg(
             Pynamixel.concepts.Joint(self.system.get_device(8), {POSITION_22_DEGREES: -1, POSITION_M22_DEGREES: 1}),
-            Pynamixel.concepts.Joint(self.system.get_device(10), {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}),
-            Pynamixel.concepts.Joint(self.system.get_device(12), {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(10),
+                {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}
+            ),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(12),
+                {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}
+            ),
         )
 
         self.left_rear_leg = Leg(
             Pynamixel.concepts.Joint(self.system.get_device(14), {POSITION_M45_DEGREES: -1, POSITION_M90_DEGREES: 1}),
-            Pynamixel.concepts.Joint(self.system.get_device(16), {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}),
-            Pynamixel.concepts.Joint(self.system.get_device(18), {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(16),
+                {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}
+            ),
+            Pynamixel.concepts.Joint(
+                self.system.get_device(18),
+                {POSITION_90_DEGREES: RADIANS_M90_DEGREES, POSITION_M70_DEGREES: RADIANS_70_DEGREES}
+            ),
         )
 
         self.left_trileg = [self.right_middle_leg, self.left_front_leg, self.left_rear_leg]
@@ -352,7 +416,8 @@ class Spider(object):
 
     def walk(self):
         try:
-            # @todo Provide better support for broadcasted (registered) writes. (Specificaly: "0x20" and "16 bits" is already known in AX12.goal_position => DRY)
+            # @todo Provide better support for broadcasted (registered) writes.
+            # (Specificaly: "0x20" and "16 bits" is already known in AX12.goal_position => DRY)
             self.system.bus.broadcast(Pynamixel.instructions.WriteData(0x20, [128, 0]))  # Moving speed
             amp = 0.5
             while True:

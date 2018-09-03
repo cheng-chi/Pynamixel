@@ -46,10 +46,12 @@ class System(object):
     @contextlib.contextmanager
     def registered_writes(self):
         """
-        Context manager telling the system to use :class:`.RegWrite` to perform registered writes and send an :class:`.Action` instruction at the end.
+        Context manager telling the system to use :class:`.RegWrite` to perform registered writes
+        and send an :class:`.Action` instruction at the end.
         See also :attr:`.direct_writes` to temporarily restore direct writes.
 
-        @todoc Add a section about registered writes in the user guide, and how beautiful it is to be able to re-use the code written for direct writes.
+        @todoc Add a section about registered writes in the user guide,
+        and how beautiful it is to be able to re-use the code written for direct writes.
         """
         self.__instruction_for_writes.append(RegWrite)
         yield

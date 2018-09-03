@@ -22,7 +22,7 @@ class Interpolator(object):
 
     def __call__(self, point):
         # @todo Binary search
-        for (lo, lo_val), (hi, hi_val) in self.__intervals:  
+        for (lo, lo_val), (hi, hi_val) in self.__intervals:
             if point < hi:
                 return lo_val + (hi_val - lo_val) * (point - lo) / (hi - lo)
         return lo_val + (hi_val - lo_val) * (point - lo) / (hi - lo)
@@ -61,8 +61,11 @@ class Joint(object):
     """
     def __init__(self, actuator, positions):
         """
-        positions: dict from [0, 0x3FF] to your logical angle unit (hint: degrees, radians, [0, 1], etc. But be consistent). Must be monotonous (else, weird weird results).
-        Intermediate positions are interpolated linearly. Positions outside are errors in set_position, and extrapolated linearly in get_position.
+        positions: dict from [0, 0x3FF] to your logical angle unit
+        (hint: degrees, radians, [0, 1], etc. But be consistent).
+        Must be monotonous (else, weird weird results).
+        Intermediate positions are interpolated linearly.
+        Positions outside are errors in set_position, and extrapolated linearly in get_position.
         """
         self.__actuator = actuator
         assert all(isinstance(k, int) and 0 <= k <= 0x3FF for k in positions.keys())

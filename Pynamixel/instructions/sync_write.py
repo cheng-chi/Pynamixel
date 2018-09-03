@@ -25,7 +25,9 @@ class SyncWrite(object):
             assert length is None or len(data) == length
             length = len(data)
         assert length is not None
-        return [self.__address, length] + list(itertools.chain.from_iterable([ident] + data for ident, data in sorted(self.__data.iteritems())))
+        return [self.__address, length] + list(
+            itertools.chain.from_iterable([ident] + data for ident, data in sorted(self.__data.iteritems()))
+        )
 
 
 class SyncWriteTestCase(unittest.TestCase):
