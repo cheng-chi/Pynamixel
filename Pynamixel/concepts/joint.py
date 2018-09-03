@@ -102,12 +102,12 @@ class JointTestCase(unittest.TestCase):
 
     def test_set(self):
         goal = self.mocks.create("goal")
-        self.actuator.expect.goal_position.andReturn(goal.object)
+        self.actuator.expect.goal_position.and_return(goal.object)
         goal.expect.write(0x200)
         self.joint.goal_position = 0
 
     def test_get(self):
         goal = self.mocks.create("goal")
-        self.actuator.expect.goal_position.andReturn(goal.object)
-        goal.expect.read().andReturn(0x200)
+        self.actuator.expect.goal_position.and_return(goal.object)
+        goal.expect.read().and_return(0x200)
         self.assertEqual(self.joint.goal_position, 0)

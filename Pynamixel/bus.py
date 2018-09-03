@@ -93,8 +93,8 @@ class BusTestCase(unittest.TestCase):
     def test_send(self):
         # From http://support.robotis.com/en/product/dynamixel/communication/dxl_instruction.htm (example 1)
         self.hardware.expect.send([0xFF, 0xFF, 0x01, 0x04, 0x02, 0x2B, 0x01, 0xCC])
-        self.hardware.expect.receive(4).andReturn([0xFF, 0xFF, 0x01, 0x03])
-        self.hardware.expect.receive(3).andReturn([0x00, 0x20, 0xDB])
+        self.hardware.expect.receive(4).and_return([0xFF, 0xFF, 0x01, 0x03])
+        self.hardware.expect.receive(3).and_return([0x00, 0x20, 0xDB])
         ident, error, parameters = self.bus.send(0x01, self.TestInstruction(0x02, [0x2B, 0x01]))
         self.assertEqual(ident, 0x01)
         self.assertEqual(error, 0x00)
@@ -107,19 +107,19 @@ class BusTestCase(unittest.TestCase):
 
     def test_hardware_returns_wrong_number_of_bytes(self):
         self.hardware.expect.send([0xFF, 0xFF, 0x01, 0x04, 0x02, 0x2B, 0x01, 0xCC])
-        self.hardware.expect.receive(4).andReturn([0xFF, 0xFF, 0x01])
+        self.hardware.expect.receive(4).and_return([0xFF, 0xFF, 0x01])
         with self.assertRaises(CommunicationError):
             self.bus.send(0x01, self.TestInstruction(0x02, [0x2B, 0x01]))
 
     def test_hardware_returns_not_ffff(self):
         self.hardware.expect.send([0xFF, 0xFF, 0x01, 0x04, 0x02, 0x2B, 0x01, 0xCC])
-        self.hardware.expect.receive(4).andReturn([0xFE, 0xFF, 0x01, 0x00])
+        self.hardware.expect.receive(4).and_return([0xFE, 0xFF, 0x01, 0x00])
         with self.assertRaises(CommunicationError):
             self.bus.send(0x01, self.TestInstruction(0x02, [0x2B, 0x01]))
 
     def test_wrong_checksum(self):
         self.hardware.expect.send([0xFF, 0xFF, 0x01, 0x04, 0x02, 0x2B, 0x01, 0xCC])
-        self.hardware.expect.receive(4).andReturn([0xFF, 0xFF, 0x01, 0x03])
-        self.hardware.expect.receive(3).andReturn([0x00, 0x20, 0xDA])
+        self.hardware.expect.receive(4).and_return([0xFF, 0xFF, 0x01, 0x03])
+        self.hardware.expect.receive(3).and_return([0x00, 0x20, 0xDA])
         with self.assertRaises(CommunicationError):
             self.bus.send(0x01, self.TestInstruction(0x02, [0x2B, 0x01]))
