@@ -6,6 +6,8 @@ sudo: false
 install:
 - pip install sphinx coveralls
 - pip install MockMockMock matplotlib pyserial
+# Temporary workaround for https://travis-ci.org/jacquev6/Pynamixel/jobs/523352455#L621
+- if [ "v$TRAVIS_PYTHON_VERSION" == "v2.7" ]; then pip install urllib3==1.24.2; fi
 script:
 - coverage run "--include=Pynamixel/*" setup.py test
 - if [ "v$TRAVIS_PYTHON_VERSION" == "v2.7" ]; then python setup.py build_sphinx --builder=doctest; fi
