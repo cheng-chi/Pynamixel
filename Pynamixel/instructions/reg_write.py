@@ -1,6 +1,10 @@
 # coding: utf8
 
-# Copyright 2015 Vincent Jacques <vincent@vincent-jacques.net>
+# Original work Copyright (c) 2015 Vincent Jacques <vincent@vincent-jacques.net>
+# Modified work Copyright 2019 Cheng Chi <chicheng@umich.edu>
+
+# TODO: Implement Protocol v2
+
 
 import unittest
 

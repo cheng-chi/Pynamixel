@@ -3,11 +3,12 @@ It supports several hardwares (see below) and adding a new one is easy.
 It provides different layers allowing very precise control as well as a greater abstraction.
 
 It's licensed under the `MIT license <http://choosealicense.com/licenses/mit/>`_.
-It's available on the `Python package index <http://pypi.python.org/pypi/Pynamixel>`_,
-its `documentation <https://jacquev6.github.io/Pynamixel/>`_
-and `its source code <https://github.com/jacquev6/Pynamixel/>`_ are on GitHub.
+Its `documentation <https://jacquev6.github.io/Pynamixel/>`_
+and `its source code <https://gitlab.eecs.umich.edu/eecs467-cinebot/Pynamixel>`_ are on GitLab.
 
-Questions? Remarks? Bugs? Want to contribute? `Open an issue <https://github.com/jacquev6/Pynamixel/issues/>`_!
+This project is forked from `Pynamixel <https://github.com/jacquev6/Pynamixel/>`_ library by Vincent Jacques.
+
+Questions? Remarks? Bugs? Want to contribute? `Open an issue <https://gitlab.eecs.umich.edu/eecs467-cinebot/Pynamixel/issues/>`_!
 
 .. image:: https://img.shields.io/travis/jacquev6/Pynamixel/master.svg
     :target: https://travis-ci.org/jacquev6/Pynamixel
@@ -57,12 +58,27 @@ Supported hardwares
 - USB2Dynamixel: not yet
 - U2D2: not yet
 
+Note: `Firmware v5 <http://www.xevelabs.com/doku.php?id=product:usb2ax:firmware_update#getting_the_firmware>`_ for USB2AX fixed some critical bugs related to protocol v2.0.
+Please consider updating if you are having return packet corruption problem.
+
+Supported servos
+===================
+
+"Full support" means on Windows, Linux and Mac OS X, with both Python 2.7+ and 3.4+.
+
+- AX12: full support (protocol v1)
+- AXS1: full support (protocol v1)
+- MX28: full support (protocol v1)
+- XL320: partial support (protocol v2) Read, Write instructions only
+
 Quick start
 ===========
 
-Install from PyPI::
+Install from source::
 
-    $ pip install Pynamixel
+    $ git clone git@gitlab.eecs.umich.edu:eecs467-cinebot/Pynamixel.git
+    $ cd Pynamixel
+    $ pip install -e .
 
 Import:
 
@@ -72,7 +88,8 @@ Import:
 
 Create a hardware::
 
-    >>> hardware = Pynamixel.hardwares.USB2AX("/dev/ttyACM0", 1000000)
+    >>> hardware = Pynamixel.hardwares.USB2AX("/dev/ttyACM0", 1000000)  # for Linux
+    >>> hardware = Pynamixel.hardwares.USB2AX("/dev/cu.usbmodem14101", 1000000)  # for MacOS
 
 Create a system and a device:
 

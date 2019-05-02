@@ -14,11 +14,11 @@ class USB2AX(object):
     """
     @todoc
     """
-    def __init__(self, port, baudrate):
+    def __init__(self, port, baudrate=1000000):
         self.__port = serial.Serial(
             port=port,
             baudrate=baudrate,
-            timeout=1,
+            timeout=0.005,
             bytesize=serial.EIGHTBITS,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE
@@ -27,6 +27,7 @@ class USB2AX(object):
     def send(self, data):
         assert isinstance(data, list) and all(isinstance(b, int) and 0 <= b <= 0xFF for b in data), data
         self.__port.write(data)
+        # self.__port.flush()
 
     def receive(self, count):
         if sys.hexversion >= 0x03000000:
@@ -37,3 +38,7 @@ class USB2AX(object):
             read = self.__port.read(count)
             assert isinstance(read, str), read
             return [ord(c) for c in read]
+
+    def flush(self):
+        self.__port.flushInput()
+        self.__port.flushOutput()

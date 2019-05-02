@@ -1,10 +1,11 @@
 # coding: utf8
 
-# Copyright 2015 Vincent Jacques <vincent@vincent-jacques.net>
+# Original work Copyright (c) 2015 Vincent Jacques <vincent@vincent-jacques.net>
+# Modified work Copyright 2019 Cheng Chi <chicheng@umich.edu>
 
 import unittest
-
 import MockMockMock
+import crcmod
 
 
 def compute_checksum(payload):
@@ -25,6 +26,7 @@ class Bus(object):
     """
     def __init__(self, hardware):
         self.__hardware = hardware
+        self.__crc16 = crcmod.mkCrcFun(0x18005, rev=False, initCrc=0x0000)
 
     def send(self, ident, instruction):
         """
@@ -50,21 +52,72 @@ class Bus(object):
         # @todo Catch and translate exceptions raised by hardware
         ff1, ff2, ident, length = self.__receive_from_hardware(4)
         if ff1 != 0xFF or ff2 != 0xFF:
-            raise CommunicationError
+            raise CommunicationError(
+                "Protocol v1: Invalid header! {}{}".format(hex(ff1), hex(ff2)))
         payload = self.__receive_from_hardware(length)
         error = payload[0]
         parameters = payload[1:-1]
         checksum = payload[-1]
         payload = [ident, length, error] + parameters
         if checksum != compute_checksum(payload):
-            raise CommunicationError
+            raise CommunicationError("Protocol v1: Invalid MD5 checksum!")
         return ident, error, response_class(parameters)
 
     def __receive_from_hardware(self, count):
         payload = self.__hardware.receive(count)
         if len(payload) != count:
-            raise CommunicationError
+            raise CommunicationError(
+                "Receive from hardware: not enough bytes received {}".format(len(payload)))
         return payload
+
+    def send_v2(self, ident, instruction):
+        """
+        @todoc
+        """
+        self.__send_v2(ident, instruction)
+        return self.__receive_v2(instruction.response_class)
+
+    def broadcast_v2(self, instruction):
+        """
+        @todoc
+        """
+        self.__send_v2(0xFE, instruction)
+
+    def __compute_crc(self, payload):
+        crc_bytes = list((self.__crc16(bytearray(payload))).to_bytes(2, byteorder='little'))
+        return crc_bytes
+
+    def __send_v2(self, ident, instruction):
+        length = len(instruction.parameters) + 3
+        length_bytes = [x for x in length.to_bytes(2, byteorder='little')]
+        payload = [0xFF, 0xFF, 0xFD, 0x00] + [ident] + length_bytes + [instruction.code] + instruction.parameters
+        # crc_bytes = list((self.__crc16(bytearray(payload))).to_bytes(2, byteorder='little'))
+        packet = payload + self.__compute_crc(payload)
+
+        self.__hardware.send(packet)
+
+    def __receive_v2(self, response_class):
+        # @todo Catch and translate exceptions raised by hardware
+        header = self.__receive_from_hardware(4)
+        ident = self.__receive_from_hardware(1)
+        length_bytes = self.__receive_from_hardware(2)
+        if header != [0xFF, 0xFF, 0xFD, 0x00]:
+            raise CommunicationError("Protocol v2: Invalid header!")
+        length = int.from_bytes(length_bytes, byteorder='little')
+        payload_bytes = self.__receive_from_hardware(length)
+        instruction = payload_bytes[0]
+        if instruction != 0x55:
+            raise CommunicationError("Protocol v2: Invalid return instruction!")
+
+        error = payload_bytes[1]
+        parameters = payload_bytes[2:-2]
+        crc = payload_bytes[-2:]
+        hardware_payload = header + ident + length_bytes + payload_bytes[:-2]
+        computed_crc = self.__compute_crc(hardware_payload)
+
+        if crc != computed_crc:
+            raise CommunicationError("Protocol v2: Invalid CRC!")
+        return ident, error, response_class(parameters)
 
 
 class ComputeChecksumTestCase(unittest.TestCase):

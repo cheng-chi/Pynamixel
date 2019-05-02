@@ -1,6 +1,7 @@
 # coding: utf8
 
-# Copyright 2015 Vincent Jacques <vincent@vincent-jacques.net>
+# Original work Copyright (c) 2015 Vincent Jacques <vincent@vincent-jacques.net>
+# Modified work Copyright 2019 Cheng Chi <chicheng@umich.edu>
 
 import unittest
 
@@ -20,7 +21,8 @@ class WriteData(object):
     code = 0x03
     response_class = WriteDataResponse
 
-    def __init__(self, address, data):
+    def __init__(self, address, data, protocol=1):
+        self.__protocol = protocol
         self.__address = address
         if isinstance(data, int):
             data = [data]
@@ -28,7 +30,10 @@ class WriteData(object):
 
     @property
     def parameters(self):
-        return [self.__address] + self.__data
+        if self.__protocol == 1:
+            return [self.__address] + self.__data
+        elif self.__protocol == 2:
+            return list(self.__address.to_bytes(2, byteorder='little')) + self.__data
 
 
 class WriteDataTestCase(unittest.TestCase):

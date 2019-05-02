@@ -1,6 +1,7 @@
 # coding: utf8
 
-# Copyright 2015 Vincent Jacques <vincent@vincent-jacques.net>
+# Original work Copyright (c) 2015 Vincent Jacques <vincent@vincent-jacques.net>
+# Modified work Copyright 2019 Cheng Chi <chicheng@umich.edu>
 
 import unittest
 
@@ -20,13 +21,18 @@ class ReadData(object):
     code = 0x02
     response_class = ReadDataResponse
 
-    def __init__(self, address, length=1):
+    def __init__(self, address, length=1, protocol=1):
+        self.__protocol = protocol
         self.__address = address
         self.__length = length
 
     @property
     def parameters(self):
-        return [self.__address, self.__length]
+        if self.__protocol == 1:
+            return [self.__address, self.__length]
+        elif self.__protocol == 2:
+            return list(self.__address.to_bytes(2, byteorder='little')) \
+                   + list(self.__length.to_bytes(2, byteorder='little'))
 
 
 class ReadDataTestCase(unittest.TestCase):
